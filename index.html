@@ -1,16 +1,219 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>לחם ושמש — מאפיית מחמצת, הדר, חיפה</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>לחם ושמש — מאפיית מחמצת בהדר, חיפה</title>
+<meta name="description" content="מאפיית מחמצת קטנה בשכונת הדר בחיפה. מתחילים משלוחים בבקרים ברחובות השכונה. הזמנות עד 20:00 בערב שלפני.">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- PLACEHOLDER. The real page has not been built yet. -->
-  <main>
-    <h1>לחם ושמש</h1>
-    <p>מאפיית מחמצת בשכונת הדר, חיפה.</p>
-  </main>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="52" height="52">
+        <path d="M22 94a38 38 0 0 1 76 0" class="mark-sun"/>
+        <g class="mark-ink" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M60 106C54 88 48 64 46 40"/>
+          <path d="M46 46c-6-4-8-11-6-18 6 3 9 9 8 16"/>
+          <path d="M48 58c-7-3-10-9-9-16 6 2 10 8 10 15"/>
+          <path d="M51 70c-7-2-11-8-11-15 7 2 11 7 11 14"/>
+          <path d="M54 82c-7-2-11-7-12-14 7 1 11 6 12 13"/>
+          <path d="M60 106c6-16 11-38 13-60"/>
+          <path d="M73 52c6-4 8-11 6-18-6 3-9 9-8 16"/>
+          <path d="M71 64c7-3 10-9 9-16-6 2-10 8-10 15"/>
+          <path d="M68 76c7-2 11-8 11-15-7 2-11 7-11 14"/>
+          <path d="M65 88c7-2 11-7 12-14-7 1-11 6-12 13"/>
+        </g>
+      </svg>
+    </span>
+    <div>
+      <h1>לחם ושמש</h1>
+      <p class="tagline">מאפיית מחמצת בשכונת הדר, חיפה · מ־2019</p>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ── Lede + hero image ─────────────────────────────────── -->
+  <section class="wrap lede">
+    <p class="lede-text">
+      אנחנו אופים לחם מחמצת ומאפים, והכל נאפה באותו בוקר.
+      <strong>עכשיו אנחנו מתחילים לחלק בשכונה בבקרים.</strong>
+    </p>
+    <a class="btn btn-primary" href="#order">להזמנת משלוח</a>
+  </section>
+
+  <figure class="hero">
+    <img
+      src="https://res.cloudinary.com/fxmb2yvw/image/upload/q_auto,f_auto,w_1600/v1788098523/Bakery.jpg"
+      srcset="https://res.cloudinary.com/fxmb2yvw/image/upload/q_auto,f_auto,w_800/v1788098523/Bakery.jpg 800w,
+              https://res.cloudinary.com/fxmb2yvw/image/upload/q_auto,f_auto,w_1200/v1788098523/Bakery.jpg 1200w,
+              https://res.cloudinary.com/fxmb2yvw/image/upload/q_auto,f_auto,w_1600/v1788098523/Bakery.jpg 1600w"
+      sizes="100vw"
+      width="2816" height="1536"
+      alt="רמי ואיריס במאפייה, לחם מחמצת חתוך ובורקס על הדלפק, חלון עם נוף לרחובות הדר ולמפרץ">
+  </figure>
+
+  <!-- ── Delivery ──────────────────────────────────────────── -->
+  <section class="wrap band" id="delivery">
+    <h2>המשלוחים</h2>
+    <p class="band-lede">מתחילים ב־1 בספטמבר.</p>
+
+    <dl class="facts">
+      <div><dt>ימים</dt><dd>ראשון עד שישי</dd></div>
+      <div><dt>שעות החלוקה</dt><dd><span data-hours>07:00–09:00</span></dd></div>
+      <div><dt>הזמנות</dt><dd>עד 20:00 בערב שלפני</dd></div>
+      <div><dt>מינימום הזמנה</dt><dd>40 ₪</dd></div>
+      <div><dt>תשלום</dt><dd>בדלת — מזומן או העברה</dd></div>
+    </dl>
+
+    <h3>אזורי החלוקה</h3>
+    <ul class="streets" data-streets>
+      <li>הרצל</li><li>מסדה</li><li>החלוץ</li><li>ביאליק</li>
+      <li class="streets-note">והסמטאות שביניהם</li>
+    </ul>
+
+    <p class="note">
+      אנחנו קמים בארבע בבוקר ואופים לפי ההזמנות שהתקבלו בערב.
+      לכן ההזמנה נסגרת ב־20:00 — מה שמוזמן עד אז, נאפה באותו לילה.
+    </p>
+  </section>
+
+  <!-- ── Products ──────────────────────────────────────────── -->
+  <section class="wrap band" id="menu">
+    <h2>מה יש אצלנו</h2>
+    <ul class="menu">
+      <li><span class="menu-name">לחם כפרי מחמצת</span><span class="menu-price">32 ₪</span></li>
+      <li><span class="menu-name">לחם שיפון</span><span class="menu-price">36 ₪</span></li>
+      <li><span class="menu-name">חלה <em>בימי שישי בלבד</em></span><span class="menu-price">28 ₪</span></li>
+      <li><span class="menu-name">בורקס גבינה <em>ליחידה</em></span><span class="menu-price">12 ₪</span></li>
+    </ul>
+  </section>
+
+  <!-- ── Order form ────────────────────────────────────────── -->
+  <section class="wrap band band-order" id="order">
+    <h2>הזמנת משלוח</h2>
+    <p class="band-lede">
+      ממלאים, ואנחנו חוזרים לאישור. התשלום בדלת בבוקר החלוקה.
+    </p>
+
+    <form id="order-form" novalidate>
+      <div class="field">
+        <label for="f-name">שם מלא <span aria-hidden="true">*</span></label>
+        <input id="f-name" name="name" type="text" autocomplete="name" required>
+      </div>
+
+      <div class="row">
+        <div class="field">
+          <label for="f-phone">טלפון <span aria-hidden="true">*</span></label>
+          <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required>
+        </div>
+        <div class="field">
+          <label for="f-email">אימייל <span aria-hidden="true">*</span></label>
+          <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-address">כתובת למשלוח <span aria-hidden="true">*</span></label>
+        <input id="f-address" name="address" type="text" autocomplete="street-address"
+               placeholder="רחוב, מספר, קומה ודירה" required>
+        <p class="hint">מחלקים ברחובות הרצל, מסדה, החלוץ, ביאליק והסמטאות שביניהם.</p>
+      </div>
+
+      <div class="field">
+        <label for="f-date">תאריך המשלוח <span aria-hidden="true">*</span></label>
+        <input id="f-date" name="delivery_date" type="date" required>
+        <p class="hint" data-date-hint>ראשון עד שישי, <span data-hours>07:00–09:00</span>.</p>
+      </div>
+
+      <fieldset class="items">
+        <legend>מה להביא</legend>
+        <ul class="item-list">
+          <li class="item" data-price="32">
+            <span class="item-name">לחם כפרי מחמצת</span>
+            <span class="item-price">32 ₪</span>
+            <span class="stepper">
+              <button type="button" class="step" data-step="-1" aria-label="פחות לחם כפרי">−</button>
+              <input type="number" name="qty_country" value="0" min="0" max="10" inputmode="numeric"
+                     aria-label="כמות לחם כפרי מחמצת">
+              <button type="button" class="step" data-step="1" aria-label="עוד לחם כפרי">+</button>
+            </span>
+          </li>
+          <li class="item" data-price="36">
+            <span class="item-name">לחם שיפון</span>
+            <span class="item-price">36 ₪</span>
+            <span class="stepper">
+              <button type="button" class="step" data-step="-1" aria-label="פחות לחם שיפון">−</button>
+              <input type="number" name="qty_rye" value="0" min="0" max="10" inputmode="numeric"
+                     aria-label="כמות לחם שיפון">
+              <button type="button" class="step" data-step="1" aria-label="עוד לחם שיפון">+</button>
+            </span>
+          </li>
+          <li class="item" data-price="28" data-friday-only>
+            <span class="item-name">חלה <em>בימי שישי בלבד</em></span>
+            <span class="item-price">28 ₪</span>
+            <span class="stepper">
+              <button type="button" class="step" data-step="-1" aria-label="פחות חלה">−</button>
+              <input type="number" name="qty_challah" value="0" min="0" max="10" inputmode="numeric"
+                     aria-label="כמות חלה">
+              <button type="button" class="step" data-step="1" aria-label="עוד חלה">+</button>
+            </span>
+          </li>
+          <li class="item" data-price="12">
+            <span class="item-name">בורקס גבינה <em>ליחידה</em></span>
+            <span class="item-price">12 ₪</span>
+            <span class="stepper">
+              <button type="button" class="step" data-step="-1" aria-label="פחות בורקס">−</button>
+              <input type="number" name="qty_bureka" value="0" min="0" max="10" inputmode="numeric"
+                     aria-label="כמות בורקס גבינה">
+              <button type="button" class="step" data-step="1" aria-label="עוד בורקס">+</button>
+            </span>
+          </li>
+        </ul>
+      </fieldset>
+
+      <div class="field">
+        <label for="f-notes">הערות</label>
+        <textarea id="f-notes" name="notes" rows="3"
+                  placeholder="קוד לשער, קומה, איפה להשאיר, כל דבר שיעזור לנו"></textarea>
+      </div>
+
+      <div class="total" data-total-box>
+        <span class="total-label">סה״כ</span>
+        <span class="total-sum"><span data-total>0</span> ₪</span>
+        <p class="total-min" data-min-note>מינימום הזמנה 40 ₪</p>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-submit">שליחת ההזמנה</button>
+
+      <p class="form-msg" data-msg role="status" aria-live="polite"></p>
+    </form>
+  </section>
+
+  <!-- ── Shop details ──────────────────────────────────────── -->
+  <section class="wrap band" id="shop">
+    <h2>החנות</h2>
+    <dl class="facts">
+      <div><dt>ראשון–חמישי</dt><dd>07:00–18:00</dd></div>
+      <div><dt>שישי</dt><dd>06:00–14:00</dd></div>
+      <div><dt>טלפון</dt><dd><a href="tel:04-000-0000">04-000-0000</a></dd></div>
+      <div><dt>אימייל</dt><dd><a href="mailto:lehem@example.co.il">lehem@example.co.il</a></dd></div>
+    </dl>
+  </section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <p>לחם ושמש · שכונת הדר, חיפה · מ־2019</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
 </body>
 </html>
