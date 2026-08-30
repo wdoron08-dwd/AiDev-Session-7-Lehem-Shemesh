@@ -62,8 +62,8 @@ Sourdough bread and pastries, everything baked the same morning.
 
 **Deliveries — the new thing**
 - Start: 1 September
-- Sunday–Friday, 07:00–09:00
-- Streets: הרצל, מסדה, החלוץ, ביאליק, and the alleys between them
+- Sunday–Friday, 06:30–08:30
+- Streets: הרצל, מסדה, החלוץ, ביאליק, יל״ג, and the alleys between them
 - Order by 20:00 the evening before
 - Minimum order 40 ₪
 - Payment at the door — cash or bank transfer
@@ -75,10 +75,9 @@ Sourdough bread and pastries, everything baked the same morning.
 
 **What they explicitly do NOT want:** no online payment, no online inventory.
 
-**Change order — apply only after the site is live and working:**
-1. Delivery hours move to 06:30–08:30 (from 07:00–09:00)
-2. Add רחוב יל״ג to the delivery streets
-Then: edit → commit → push. **Do not touch Vercel** — it redeploys itself in under a minute.
+**Change order — ✅ applied 2026-08-30.** Hours moved to 06:30–08:30, רחוב יל״ג added.
+Changed in `index.html`, `knowledge/01-business.md`, and all three n8n email templates —
+the emails state the delivery window, so leaving them would have contradicted the page.
 
 ---
 
@@ -166,11 +165,9 @@ LIVE_URL: https://ai-dev-session-7-lehem-shemesh.vercel.app
 
 ### 📌 Next, in order
 1. Test on a real phone — the page and the confirmation email. Fix, commit, push each fix.
-2. Apply the change order: delivery hours 07:00–09:00 → 06:30–08:30, add רחוב יל״ג to the
-   streets. Edit, commit, push. **Do not touch Vercel** — it republishes itself.
-3. Send the two URLs to zohar@focusai.co.il
+2. Send the two URLs to zohar@focusai.co.il
 
-Done: ~~page~~ ~~image~~ ~~logo~~ ~~n8n workflow~~ ~~Vercel~~ ~~CORS locked~~
+Done: ~~page~~ ~~image~~ ~~logo~~ ~~n8n workflow~~ ~~Vercel~~ ~~CORS locked~~ ~~change order~~
 
 ### ⚠️ Known debt
 - The bakery photos are AI-generated, including the two people presented as Rami and Iris.

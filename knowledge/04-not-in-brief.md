@@ -45,8 +45,8 @@ if confirmed, it's a one-word edit.
 "And the alleys between them" is genuinely vague, and someone one street over will ask.
 Write the streets as given, plus the alleys clause. **Do not draw a map or list extra streets.**
 
-*(Note: the change order later adds רחוב יל״ג. Don't add it early — it only applies after the
-site is live.)*
+*(The change order added רחוב יל״ג on 2026-08-30, after the site was live. It is now in
+`01-business.md` and on the page.)*
 
 ### Q3 · What happens if someone orders under 40 ₪, or after 20:00?
 

@@ -1,5 +1,8 @@
 # 01 · Business facts — לחם ושמש
 
+> **Updated 2026-08-30 by the client's change order:** delivery window moved to 06:30–08:30
+> (was 07:00–09:00), and רחוב יל״ג added to the delivery streets.
+>
 > **Every line here comes from the client email.** Nothing has been added, rounded, or
 > smoothed. If a detail is not on this page, it was not in the brief — see `04-not-in-brief.md`
 > before putting it anywhere near the site.
@@ -31,8 +34,8 @@ this table, they didn't say they sell it.
 |---|---|
 | **Starts** | 1 September |
 | **Days** | Sunday–Friday |
-| **Window** | 07:00–09:00 |
-| **Streets** | הרצל · מסדה · החלוץ · ביאליק — *and the alleys between them* |
+| **Window** | 06:30–08:30 |
+| **Streets** | הרצל · מסדה · החלוץ · ביאליק · יל״ג — *and the alleys between them* |
 | **Order by** | 20:00 the evening before |
 | **Minimum order** | 40 ₪ |
 | **Payment** | at the door — cash or bank transfer (מזומן או העברה) |
