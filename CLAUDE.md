@@ -152,31 +152,61 @@ done by hand on a phone, against the live URL.
 > If this disagrees with git, git wins — and fix this block.
 
 ### ▶️ START HERE
-**The whole chain works end to end, verified from the live site in a real browser.**
-Form → n8n webhook → Google Sheets row → owner alert → branched customer confirmation.
-CORS is locked to the live origin. The workflow is active and published.
+**Task complete and submitted.** Both URLs emailed to zohar@focusai.co.il on 2026-08-30.
 
-Remaining: test on a real phone, then apply the change order (delivery hours to 06:30–08:30,
-add רחוב יל״ג), push, and confirm Vercel republishes on its own.
+Everything in the brief is built, live, and verified end to end from a real browser:
+the page, the AI image on Cloudinary, the logo, the order form, the n8n automation
+(Sheets row + owner alert + branched customer confirmation), CORS locked to the live
+origin, and the client's change order applied and auto-published.
 
-Doron is working through the task step by step and wants to be consulted before each step.
+Nothing is in flight. If you are picking this up again, it is for polish or for reusing
+the patterns — not to finish anything.
 
 LIVE_URL: https://ai-dev-session-7-lehem-shemesh.vercel.app
 
-### 📌 Next, in order
-1. Test on a real phone — the page and the confirmation email. Fix, commit, push each fix.
-2. Send the two URLs to zohar@focusai.co.il
+### 🔑 Live things
+| | |
+|---|---|
+| Site | https://ai-dev-session-7-lehem-shemesh.vercel.app |
+| Repo | https://github.com/wdoron08-dwd/AiDev-Session-7-Lehem-Shemesh (public) |
+| n8n workflow | `V2iMcf7t8wUSQhCx` · webhook `/webhook/lehem-shemesh-order` |
+| Orders sheet | `1_9BUAVANBgMazdThs4gAcVCoILhcDD0e2K2O0s2NFFI`, tab `Orders` |
+| Cloudinary | cloud `fxmb2yvw` — `Bakery.jpg` (hero), `Bakery-delivery.jpg` (emails) |
 
-Done: ~~page~~ ~~image~~ ~~logo~~ ~~n8n workflow~~ ~~Vercel~~ ~~CORS locked~~ ~~change order~~
+### What is built, and how it was proven
+| | |
+|---|---|
+| One HTML page + separate CSS | No libraries, no build step. 0px horizontal overflow at 390px, measured in a headless browser. |
+| Hero image | Cloudinary `q_auto,f_auto` + srcset. 4.0MB original → 61KB WebP on a phone, measured. |
+| Logo | Wheat + rising sun, redrawn as SVG from the mark on the bag photo. PNG with alpha for email. |
+| Order form | 10 fields, live total, 40₪ minimum showing the exact shortfall, challah disabled unless Friday, Saturdays blocked. |
+| 20:00 cutoff | Verified with a faked clock at 18:00 / 19:59 / 20:01 / 23:30 Israel time, from both Asia/Jerusalem and America/New_York. |
+| n8n automation | Execution 4417 in `mode: webhook` — real submission from the live site. Sheets row + two distinct Gmail message ids. |
+| Branching | Execution 4415 proved the pending path after a real bug was found and fixed (see landmines). |
+| CORS | Locked to the exact origin read from `window.location.origin`, not copied from a dashboard. Preflight returns 204. |
+| Change order | Live ~1 second after `git push`, Vercel untouched. |
 
 ### ⚠️ Known debt
-- The bakery photos are AI-generated, including the two people presented as Rami and Iris.
-  The client framed the images as temporary and to be swapped for real photos; the faces are
-  the sharper version of that question. See `knowledge/04-not-in-brief.md`.
-- The Sheet holds test rows from development. Clear them before handing it over.
+- **The people in the hero photo are AI-generated** and presented as Rami and Iris. The client
+  framed all imagery as temporary and to be replaced with real photographs; the faces are the
+  sharper edge of that. Logged as a judgment call in `knowledge/04-not-in-brief.md`, not a
+  defect — but it is the thing to fix first if this were ever real.
+- **Four questions the brief never answered** are recorded in `knowledge/04-not-in-brief.md`
+  rather than guessed: what "העברה" means in practice (Bit? Paybox?), how far "the alleys
+  between them" reaches, what happens below the 40₪ minimum, and whether delivery costs
+  anything. None are on the page.
+- The webhook URL is public by necessity — the browser calls it. CORS stops other websites,
+  not a direct `curl`. The brief says as much and defers it to a later session.
 
-### 🔑 Live things
-- Site: https://ai-dev-session-7-lehem-shemesh.vercel.app
-- Repo: https://github.com/wdoron08-dwd/AiDev-Session-7-Lehem-Shemesh
-- n8n workflow `V2iMcf7t8wUSQhCx` · webhook `/webhook/lehem-shemesh-order`
-- Orders sheet `1_9BUAVANBgMazdThs4gAcVCoILhcDD0e2K2O0s2NFFI`, tab `Orders`
+### 🧨 What this session learned the hard way
+Both were **silent failures that reported success** — the expensive kind.
+1. Google Sheets with an empty tab invented columns from the raw webhook envelope and wrote
+   the whole order into one cell, reporting success. `handlingExtraData: ignoreIt` makes it
+   error instead.
+2. `$json` is only ever the *previous node's* output. After a Gmail node it is
+   `{id, threadId, labelIds}`, so an IF comparing `$json.status` silently fell false and
+   **pending orders were sent the "confirmed" email**. Anything downstream of a Gmail node
+   must reference `$('Order fields').item.json.*` explicitly.
+
+Neither would have been caught by reading the workflow. Both came from running it and
+reading the execution data.
