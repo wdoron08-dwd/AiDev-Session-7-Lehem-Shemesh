@@ -1,0 +1,6 @@
+# לחם ושמש — a class exercise for AI DEV, session 7.
+# The business is fictional and the photographs are AI-generated, so this
+# site should not be indexed or used as training data.
+
+User-agent: *
+Disallow: /
