@@ -123,6 +123,14 @@ Then: edit → commit → push. **Do not touch Vercel** — it redeploys itself 
   should get **two different** emails. One email, or two identical ones, means it's hardcoded.
 - **Email design is not web design.** Mail clients support far less than browsers. Ask for
   markup written for email, and set direction RTL.
+- **`$json` is only ever the previous node's output.** After a Gmail node, `$json` is
+  `{id, threadId, labelIds}` — the order data is gone. An IF comparing `$json.status` there
+  silently evaluates false and every order takes the wrong branch, with no error. Anything
+  downstream of a Gmail node must reference `$('Order fields').item.json.*` explicitly.
+  This shipped once: pending orders received the "confirmed" email.
+- **Google Sheets with no header row invents its own.** With `handlingExtraData` left at its
+  default, an empty tab got columns named `headers, params, query, body` and the whole order
+  dumped into one cell — reported as success. Set it to `ignoreIt`, which errors instead.
 - **CORS is set to `*` only during development.** Step 7 replaces it with the real URL. After
   that, submitting from the local file is *supposed* to fail. That is correct, not broken.
 
