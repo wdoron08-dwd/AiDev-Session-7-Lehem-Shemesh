@@ -5,9 +5,10 @@
 (function () {
   'use strict';
 
-  // Set once the n8n workflow is live. Empty = form reports it is not connected
-  // yet rather than failing silently.
-  var WEBHOOK_URL = '';
+  // n8n production webhook. Its Allowed Origins (CORS) must match this site's
+  // origin exactly — https://, no trailing slash — or the browser blocks the
+  // request before n8n ever sees it.
+  var WEBHOOK_URL = 'https://dwdai.app.n8n.cloud/webhook/lehem-shemesh-order';
 
   var MINIMUM = 40;
 
