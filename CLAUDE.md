@@ -36,7 +36,18 @@ Anything not written there does not exist. No awards, no testimonials, no "best 
 
 ---
 
-## 📇 Client facts — the only permitted source of truth
+## 📁 Knowledge files — read before building
+
+| File | Read it when |
+|---|---|
+| `knowledge/01-business.md` | You need a fact. **The only permitted source.** |
+| `knowledge/02-visual.md` | Image prompt, logo direction, palette. Ours to invent. |
+| `knowledge/03-requirements.md` | What the page and automation must do, and why |
+| `knowledge/04-not-in-brief.md` | **Before writing any detail you're unsure about.** Open questions and the invent/don't-invent line. |
+
+---
+
+## 📇 Client facts — summary (full version in `knowledge/01-business.md`)
 
 Rami & Iris · לחם ושמש · Hadar, Haifa · operating since 2019.
 Sourdough bread and pastries, everything baked the same morning.
