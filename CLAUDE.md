@@ -153,24 +153,33 @@ done by hand on a phone, against the live URL.
 > If this disagrees with git, git wins — and fix this block.
 
 ### ▶️ START HERE
-Deployed and live, but the page itself is still the placeholder. The full chain
-GitHub → Vercel is wired and proven: pushing to `main` publishes automatically. `index.html`
-and `style.css` both serve 200 from the live URL, so the case-sensitivity trap is clear.
-Nothing of the real site is built yet — no content, no image, no form, no automation.
+**The whole chain works end to end, verified from the live site in a real browser.**
+Form → n8n webhook → Google Sheets row → owner alert → branched customer confirmation.
+CORS is locked to the live origin. The workflow is active and published.
+
+Remaining: test on a real phone, then apply the change order (delivery hours to 06:30–08:30,
+add רחוב יל״ג), push, and confirm Vercel republishes on its own.
+
 Doron is working through the task step by step and wants to be consulted before each step.
 
 LIVE_URL: https://ai-dev-session-7-lehem-shemesh.vercel.app
 
 ### 📌 Next, in order
-1. Design and build the page itself — content from the client facts above
-2. Generate the image (ChatGPT/Gemini), upload to Cloudinary with `q_auto,f_auto`
-3. Build the n8n workflow: Sheets row + owner alert + HTML confirmation to the enquirer
-4. Wire the form to the webhook, CORS `*` for now
-5. ~~Import to Vercel~~ ✅ done — auto-deploys from `main`
-6. Replace CORS `*` with the real Vercel URL, retest from the live site
-7. Test on a real phone, fix what breaks, commit and push each fix
-8. Apply the change order, push, confirm it goes live on its own
+1. Test on a real phone — the page and the confirmation email. Fix, commit, push each fix.
+2. Apply the change order: delivery hours 07:00–09:00 → 06:30–08:30, add רחוב יל״ג to the
+   streets. Edit, commit, push. **Do not touch Vercel** — it republishes itself.
+3. Send the two URLs to zohar@focusai.co.il
+
+Done: ~~page~~ ~~image~~ ~~logo~~ ~~n8n workflow~~ ~~Vercel~~ ~~CORS locked~~
 
 ### ⚠️ Known debt
-- `index.html` / `style.css` are placeholders, present only so the repo isn't empty and Vercel
-  has something to serve.
+- The bakery photos are AI-generated, including the two people presented as Rami and Iris.
+  The client framed the images as temporary and to be swapped for real photos; the faces are
+  the sharper version of that question. See `knowledge/04-not-in-brief.md`.
+- The Sheet holds test rows from development. Clear them before handing it over.
+
+### 🔑 Live things
+- Site: https://ai-dev-session-7-lehem-shemesh.vercel.app
+- Repo: https://github.com/wdoron08-dwd/AiDev-Session-7-Lehem-Shemesh
+- n8n workflow `V2iMcf7t8wUSQhCx` · webhook `/webhook/lehem-shemesh-order`
+- Orders sheet `1_9BUAVANBgMazdThs4gAcVCoILhcDD0e2K2O0s2NFFI`, tab `Orders`
