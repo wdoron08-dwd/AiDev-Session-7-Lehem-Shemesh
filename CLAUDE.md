@@ -134,19 +134,20 @@ done by hand on a phone, against the live URL.
 > If this disagrees with git, git wins — and fix this block.
 
 ### ▶️ START HERE
-Scaffolding only. Folder created, git initialised on `main`, remote pointed at the public repo
-`wdoron08-dwd/AiDev-Session-7-Lehem-Shemesh`. `index.html` and `style.css` are placeholders —
-no real site has been built yet. Doron is working through the task step by step and wants to
-be consulted before each step.
+Deployed and live, but the page itself is still the placeholder. The full chain
+GitHub → Vercel is wired and proven: pushing to `main` publishes automatically. `index.html`
+and `style.css` both serve 200 from the live URL, so the case-sensitivity trap is clear.
+Nothing of the real site is built yet — no content, no image, no form, no automation.
+Doron is working through the task step by step and wants to be consulted before each step.
 
-LIVE_URL: (not deployed yet)
+LIVE_URL: https://ai-dev-session-7-lehem-shemesh.vercel.app
 
 ### 📌 Next, in order
 1. Design and build the page itself — content from the client facts above
 2. Generate the image (ChatGPT/Gemini), upload to Cloudinary with `q_auto,f_auto`
 3. Build the n8n workflow: Sheets row + owner alert + HTML confirmation to the enquirer
 4. Wire the form to the webhook, CORS `*` for now
-5. Import to Vercel from the dashboard — Doron does this, not Claude Code
+5. ~~Import to Vercel~~ ✅ done — auto-deploys from `main`
 6. Replace CORS `*` with the real Vercel URL, retest from the live site
 7. Test on a real phone, fix what breaks, commit and push each fix
 8. Apply the change order, push, confirm it goes live on its own
