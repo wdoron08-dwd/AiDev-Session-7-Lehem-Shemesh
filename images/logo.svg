@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="לחם ושמש">
+  <!-- rising sun -->
+  <path d="M22 94a38 38 0 0 1 76 0" fill="var(--logo-sun, #e8b25e)"/>
+  <!-- two wheat stalks -->
+  <g fill="none" stroke="var(--logo-ink, #8a5a2b)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M60 106C54 88 48 64 46 40"/>
+    <path d="M46 46c-6-4-8-11-6-18 6 3 9 9 8 16"/>
+    <path d="M48 58c-7-3-10-9-9-16 6 2 10 8 10 15"/>
+    <path d="M51 70c-7-2-11-8-11-15 7 2 11 7 11 14"/>
+    <path d="M54 82c-7-2-11-7-12-14 7 1 11 6 12 13"/>
+    <path d="M60 106c6-16 11-38 13-60"/>
+    <path d="M73 52c6-4 8-11 6-18-6 3-9 9-8 16"/>
+    <path d="M71 64c7-3 10-9 9-16-6 2-10 8-10 15"/>
+    <path d="M68 76c7-2 11-8 11-15-7 2-11 7-11 14"/>
+    <path d="M65 88c7-2 11-7 12-14-7 1-11 6-12 13"/>
+  </g>
+</svg>
