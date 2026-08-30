@@ -1,0 +1,156 @@
+# CLAUDE.md — לחם ושמש (AI DEV, מפגש 7)
+
+## 🧭 Identity & Role
+
+You are pair programmer for Doron's Session 7 class task: build a one-page site for a
+real-seeming client, wire it to an n8n automation, and get it live on a public URL.
+
+**Objective:** one HTML page + separate CSS, an AI-generated image on Cloudinary, a contact
+form that reaches an n8n webhook, deployed on Vercel from a public GitHub repo.
+
+**Stack:** plain HTML + CSS (no libraries, no build tools). n8n · Google Sheets · Cloudinary ·
+GitHub · Vercel.
+
+**The client:** לחם ושמש — a small sourdough bakery in Hadar, Haifa, run by Rami & Iris.
+
+---
+
+## 🛑 Standing Rules
+
+### 1. Approval gate
+Doron is doing this task step by step, deliberately. **Discuss and plan before editing.**
+Wait for an explicit GO. One GO = one step. Reading, searching and measuring need no GO.
+
+### 2. Commit after every meaningful change
+The task requires **at least 5 commits** with messages that say what was done. One big commit
+at the end fails the requirement, and it cannot be fixed retroactively. Commit as you go.
+
+### 3. Push, don't just commit
+Vercel deploys from GitHub, not from this Mac. A commit that was never pushed will never
+reach the live site. Every commit gets pushed.
+
+### 4. מותר לייצר, אסור להמציא — generate freely, invent nothing
+Images, logo, colours and layout are **our** call; the client said so explicitly.
+Facts — years, prices, hours, streets, phone — come **only** from the client email below.
+Anything not written there does not exist. No awards, no testimonials, no "best in the city".
+
+---
+
+## 📇 Client facts — the only permitted source of truth
+
+Rami & Iris · לחם ושמש · Hadar, Haifa · operating since 2019.
+Sourdough bread and pastries, everything baked the same morning.
+
+**Products**
+| Item | Price |
+|---|---|
+| לחם כפרי מחמצת | 32 ₪ |
+| לחם שיפון | 36 ₪ |
+| חלה (ימי שישי בלבד) | 28 ₪ |
+| בורקס גבינה (ליחידה) | 12 ₪ |
+
+**Deliveries — the new thing**
+- Start: 1 September
+- Sunday–Friday, 07:00–09:00
+- Streets: הרצל, מסדה, החלוץ, ביאליק, and the alleys between them
+- Order by 20:00 the evening before
+- Minimum order 40 ₪
+- Payment at the door — cash or bank transfer
+
+**Other details**
+- They wake at 04:00 and bake to the orders received the previous evening
+- Shop hours: Sun–Thu 07:00–18:00, Fri 06:00–14:00
+- Phone 04-000-0000 · Email lehem@example.co.il
+
+**What they explicitly do NOT want:** no online payment, no online inventory.
+
+**Change order — apply only after the site is live and working:**
+1. Delivery hours move to 06:30–08:30 (from 07:00–09:00)
+2. Add רחוב יל״ג to the delivery streets
+Then: edit → commit → push. **Do not touch Vercel** — it redeploys itself in under a minute.
+
+---
+
+## ✅ Deliverables
+
+- [ ] One HTML page + separate CSS. No libraries, no build tools.
+- [ ] AI-generated image hosted on Cloudinary, URL embedded in the code
+- [ ] Logo, or the business name set nicely as type
+- [ ] Form → n8n webhook: name, phone, email, free-text. User sees success or error.
+- [ ] Every enquiry saved as a row in Google Sheets, with a timestamp
+- [ ] Alert email to the business owner → goes to Doron
+- [ ] Confirmation email to the enquirer, HTML-designed → goes to the address they typed
+- [ ] At least 5 commits with meaningful messages
+- [ ] Public GitHub repo with full history
+- [ ] Live Vercel URL, opens on any device
+- [ ] CORS locked to the real site URL, not `*`
+- [ ] Change order applied and published
+
+**Submit:** live URL + repo URL, emailed to zohar@focusai.co.il
+
+---
+
+## 🧨 Landmines — each one already bit someone
+
+- **CORS is matched character for character.** `https://site.vercel.app` is right.
+  Missing `https://` is wrong; a trailing `/` is wrong. Both fail *silently* — no error
+  message anywhere. Vercel's dashboard shows the URL without `https://`, and copying from the
+  browser bar adds the slash. Both traps are copy-paste artifacts.
+- **Form fails and n8n shows nothing?** The request never left the browser. That's CORS.
+  Check the browser console for a message naming it.
+- **Never ask Claude Code to deploy to Vercel.** The CLI asks interactive questions and waits
+  for a keyboard that isn't attached — it hangs. Deploy from the dashboard: Add New → Import.
+  Git, GitHub, commits and pushes are all fine for Claude Code to do.
+- **A new repo does not appear in Vercel by itself.** Every project needs its own Import.
+- **Filename case matters on Vercel, not on your Mac.** `Style.css` vs `style.css` — the page
+  looks perfect locally and deploys with no styling at all. First thing to check if the design
+  vanishes after deploy.
+- **Image weight.** The client asked for a page that opens fast on a phone. Use Cloudinary's
+  `q_auto` and `f_auto` URL parameters.
+- **The confirmation email's recipient is dynamic.** It must reference the email field from the
+  webhook's schema, not a typed-in address. Test: fill the form with your own email and you
+  should get **two different** emails. One email, or two identical ones, means it's hardcoded.
+- **Email design is not web design.** Mail clients support far less than browsers. Ask for
+  markup written for email, and set direction RTL.
+- **CORS is set to `*` only during development.** Step 7 replaces it with the real URL. After
+  that, submitting from the local file is *supposed* to fail. That is correct, not broken.
+
+---
+
+## 🔧 Commands
+
+```bash
+./status.sh    # cold-start state probe — run this first, every session
+```
+
+There is no test suite. Nothing here is verified automatically — the checks that matter are
+done by hand on a phone, against the live URL.
+
+---
+
+## 🏁 Session Snapshot — updated 2026-08-30
+
+> Current state only. Rewrite this at every warm close; never append.
+> If this disagrees with git, git wins — and fix this block.
+
+### ▶️ START HERE
+Scaffolding only. Folder created, git initialised on `main`, remote pointed at the public repo
+`wdoron08-dwd/AiDev-Session-7-Lehem-Shemesh`. `index.html` and `style.css` are placeholders —
+no real site has been built yet. Doron is working through the task step by step and wants to
+be consulted before each step.
+
+LIVE_URL: (not deployed yet)
+
+### 📌 Next, in order
+1. Design and build the page itself — content from the client facts above
+2. Generate the image (ChatGPT/Gemini), upload to Cloudinary with `q_auto,f_auto`
+3. Build the n8n workflow: Sheets row + owner alert + HTML confirmation to the enquirer
+4. Wire the form to the webhook, CORS `*` for now
+5. Import to Vercel from the dashboard — Doron does this, not Claude Code
+6. Replace CORS `*` with the real Vercel URL, retest from the live site
+7. Test on a real phone, fix what breaks, commit and push each fix
+8. Apply the change order, push, confirm it goes live on its own
+
+### ⚠️ Known debt
+- `index.html` / `style.css` are placeholders, present only so the repo isn't empty and Vercel
+  has something to serve.

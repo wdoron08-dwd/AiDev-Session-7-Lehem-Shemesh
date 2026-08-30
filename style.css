@@ -1,0 +1,9 @@
+/* PLACEHOLDER. The real stylesheet has not been written yet.
+   Filename is lowercase on purpose: Vercel is case-sensitive, macOS is not. */
+
+body {
+  margin: 0;
+  padding: 2rem;
+  font-family: system-ui, sans-serif;
+  line-height: 1.65;
+}
