@@ -21,6 +21,8 @@
   var totalBox = form.querySelector('[data-total-box]');
   var minNote  = form.querySelector('[data-min-note]');
   var msgEl    = form.querySelector('[data-msg]');
+  var lateBox  = form.querySelector('[data-late]');
+  var lateAck  = form.elements['late_ack'];
   var submitEl = form.querySelector('.btn-submit');
 
   // ── Delivery date: Sun–Fri only, tomorrow at the earliest ──────────────
@@ -38,6 +40,51 @@
   var earliest = firstDeliverableFrom(tomorrow);
   dateEl.min   = iso(earliest);
   dateEl.value = iso(earliest);
+
+  // ── The 20:00 cutoff ───────────────────────────────────────────────────
+  // They bake at 04:00 to whatever came in by 20:00 the evening before. So an
+  // order placed after 20:00 for TOMORROW is not guaranteed — it goes through
+  // as pending, and the bakery confirms or moves it by phone. An order placed
+  // after 20:00 for a later date is perfectly normal.
+  //
+  // Read the clock in Israel time, not the visitor's: someone ordering from
+  // abroad, or with a misconfigured phone, must still get the bakery's cutoff.
+  function nowInIsrael() {
+    var f = new Intl.DateTimeFormat('en-GB', {
+      timeZone: 'Asia/Jerusalem', hour12: false,
+      year: 'numeric', month: '2-digit', day: '2-digit',
+      hour: '2-digit', minute: '2-digit'
+    }).formatToParts(new Date());
+    var v = {};
+    f.forEach(function (p) { v[p.type] = p.value; });
+    return {
+      date: v.year + '-' + v.month + '-' + v.day,
+      hour: parseInt(v.hour, 10),
+      minute: parseInt(v.minute, 10)
+    };
+  }
+
+  function tomorrowInIsrael() {
+    var n = nowInIsrael().date.split('-');
+    var d = new Date(+n[0], +n[1] - 1, +n[2]);
+    d.setDate(d.getDate() + 1);
+    return iso(d);
+  }
+
+  // True when it is past 20:00 in Israel AND the chosen date is tomorrow.
+  function isLateOrder() {
+    if (!dateEl.value) return false;
+    return nowInIsrael().hour >= 20 && dateEl.value === tomorrowInIsrael();
+  }
+
+  function syncLate() {
+    var late = isLateOrder();
+    lateBox.hidden = !late;
+    if (!late) {
+      lateAck.checked = false;
+      lateBox.removeAttribute('data-missing');
+    }
+  }
 
   // ── Challah is Friday-only ─────────────────────────────────────────────
   function chosenDay() {
@@ -76,7 +123,7 @@
   });
 
   form.addEventListener('input', function (e) {
-    if (e.target === dateEl) { syncFridayOnly(); }
+    if (e.target === dateEl) { syncFridayOnly(); syncLate(); }
     recalc();
   });
 
@@ -137,6 +184,14 @@
     if (chosenDay() === 6) return invalid(dateEl, 'אנחנו מחלקים ראשון עד שישי.');
     if (dateEl.value < dateEl.min) return invalid(dateEl, 'אפשר להזמין רק מהיום שאחרי.');
 
+    if (isLateOrder() && !lateAck.checked) {
+      lateBox.setAttribute('data-missing', '');
+      show('err', 'ההזמנה נכנסת אחרי 20:00. צריך לאשר שהיא ממתינה לאישור.');
+      lateAck.focus();
+      return false;
+    }
+    lateBox.removeAttribute('data-missing');
+
     var sum = recalc();
     if (sum === 0) { show('err', 'צריך לבחור לפחות פריט אחד.'); return false; }
     if (sum < MINIMUM) { show('err', 'מינימום הזמנה 40 ₪.'); return false; }
@@ -170,6 +225,7 @@
       order_summary:  ls.map(function (l) { return l.name + ' ×' + l.qty; }).join(', '),
       total:          ls.reduce(function (a, l) { return a + l.sum; }, 0),
       notes:          fld('notes').value.trim(),
+      status:         isLateOrder() ? 'ממתין לאישור' : 'מאושר',
       submitted_at:   new Date().toISOString()
     };
 
@@ -188,10 +244,13 @@
     })
       .then(function (res) {
         if (!res.ok) throw new Error('HTTP ' + res.status);
-        show('ok', 'ההזמנה התקבלה. שלחנו אישור למייל, ונתראה בבוקר החלוקה.');
+        show('ok', payload.status === 'ממתין לאישור'
+          ? 'ההזמנה התקבלה וממתינה לאישור. שלחנו פרטים למייל, ונחזור אליכם טלפונית.'
+          : 'ההזמנה התקבלה. שלחנו אישור למייל, ונתראה בבוקר החלוקה.');
         form.reset();
         dateEl.value = iso(earliest);
         syncFridayOnly();
+        syncLate();
         recalc();
       })
       .catch(function () {
@@ -204,5 +263,6 @@
   });
 
   syncFridayOnly();
+  syncLate();
   recalc();
 })();

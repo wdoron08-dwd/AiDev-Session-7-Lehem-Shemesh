@@ -129,6 +129,20 @@
         <label for="f-date">תאריך המשלוח <span aria-hidden="true">*</span></label>
         <input id="f-date" name="delivery_date" type="date" required>
         <p class="hint" data-date-hint>ראשון עד שישי, <span data-hours>07:00–09:00</span>.</p>
+
+        <!-- Shown only when it is past 20:00 and the chosen date is tomorrow.
+             The order is not blocked — it goes through as pending approval. -->
+        <div class="late" data-late hidden>
+          <p class="late-head">ההזמנה נכנסת אחרי 20:00</p>
+          <p class="late-body">
+            אנחנו כבר אופים לפי ההזמנות שהתקבלו הערב, ולכן משלוח מחר אינו מובטח.
+            נחזור אליכם טלפונית — אם יש לנו מקום נאפה גם את זה, ואם לא נתאם תאריך אחר.
+          </p>
+          <label class="late-ack">
+            <input type="checkbox" name="late_ack" value="1">
+            <span>הבנתי שההזמנה ממתינה לאישור ושתיתכן דחייה לתאריך אחר</span>
+          </label>
+        </div>
       </div>
 
       <fieldset class="items">
