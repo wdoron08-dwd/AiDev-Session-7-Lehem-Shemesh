@@ -1,0 +1,275 @@
+/* לחם ושמש — קליטת חשבוניות
+   Palette, type and layout copied from the bakery site's style.css so the two
+   look like one system. Heebo is named there but never loaded; matching means
+   matching, so no font link here either. */
+
+:root {
+  --paper:      #fbf7f0;
+  --paper-warm: #f4ece0;
+  --ink:        #2e2620;
+  --ink-soft:   #6d6055;
+  --crust:      #8a5a2b;
+  --crust-deep: #6b4520;
+  --sun:        #e8b25e;
+  --line:       #e2d7c7;
+  --ok:         #2f6b46;
+  --err:        #9c3025;
+  --warn:       #8a5f14;
+  --warn-bg:    #fdf4e3;
+  --warn-line:  #e8cf9a;
+
+  --wrap: 46rem;
+  --radius: 14px;
+  --shadow: 0 1px 2px rgba(46,38,32,.06), 0 6px 20px rgba(46,38,32,.06);
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: "Heebo", "Assistant", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+.wrap { width: min(100% - 2.5rem, var(--wrap)); margin-inline: auto; }
+
+h1, h2, h3 { line-height: 1.25; margin: 0 0 .5rem; font-weight: 700; }
+h2 { font-size: 1.5rem; color: var(--crust-deep); }
+p  { margin: 0 0 1rem; }
+a  { color: var(--crust); }
+
+/* ── Masthead ─────────────────────────────────────────── */
+.masthead {
+  background: var(--paper-warm);
+  border-bottom: 1px solid var(--line);
+  padding: 1.5rem 0;
+}
+.masthead-inner { display: flex; align-items: center; gap: .9rem; }
+.mark { flex: none; display: block; }
+.mark-sun { fill: var(--sun); }
+.mark-ink { stroke: var(--crust); }
+.masthead h1 { font-size: 1.75rem; letter-spacing: -.01em; margin: 0; }
+.tagline { margin: .15rem 0 0; color: var(--ink-soft); font-size: .9375rem; }
+
+/* ── Intro ────────────────────────────────────────────── */
+.intro { padding: 1.75rem 0 .5rem; }
+.intro p {
+  font-size: 1.0625rem;
+  max-width: 34rem;
+  color: var(--ink-soft);
+  text-align: start;   /* the bakery site is right-aligned, not centred */
+}
+
+/* ── The drop zone ────────────────────────────────────── */
+.pick {
+  margin: 1rem 0 1.5rem;
+  padding: 1.5rem 1.25rem;
+  background: #fff;
+  border: 2px dashed var(--line);
+  border-radius: var(--radius);
+  text-align: center;
+  transition: border-color .15s, background .15s;
+}
+.pick.dragover { border-color: var(--crust); background: var(--paper-warm); }
+
+.btn {
+  display: inline-block;
+  border: 0;
+  border-radius: 10px;
+  padding: .7rem 1.4rem;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+.btn-primary { background: var(--crust); color: #fff; }
+.btn-primary:hover { background: var(--crust-deep); }
+.btn-secondary {
+  background: #fff;
+  color: var(--crust-deep);
+  border: 1px solid var(--line);
+}
+.btn-secondary:hover { background: var(--paper-warm); }
+.btn[disabled] { opacity: .55; cursor: default; }
+
+.btn-row {
+  display: flex;
+  gap: .6rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn-row .btn { flex: 1 1 12rem; max-width: 18rem; }
+
+.pick-hint {
+  margin: .9rem 0 0;
+  font-size: .875rem;
+  color: var(--ink-soft);
+}
+.pick-or {
+  margin: .75rem 0 0;
+  font-size: .875rem;
+  color: var(--ink-soft);
+}
+
+/* the file inputs themselves are never shown */
+.pick input[type="file"] { display: none; }
+
+/* ── Notices ──────────────────────────────────────────── */
+.notice {
+  margin: 0 0 1rem;
+  padding: .8rem 1rem;
+  border-radius: 10px;
+  font-size: .9375rem;
+  line-height: 1.6;
+}
+.notice[hidden] { display: none; }
+.notice-warn { background: var(--warn-bg); border: 1px solid var(--warn-line); color: var(--warn); }
+.notice-info { background: var(--paper-warm); border: 1px solid var(--line); color: var(--ink-soft); }
+
+/* ── The list ─────────────────────────────────────────── */
+.list { margin: 0 0 2rem; }
+.list[hidden] { display: none; }
+
+.list-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: .75rem;
+}
+.list-head h2 { margin: 0; }
+.list-count { font-size: .875rem; color: var(--ink-soft); }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.1rem;
+  margin-bottom: .75rem;
+  box-shadow: var(--shadow);
+}
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: .75rem;
+}
+.card-name {
+  font-size: .875rem;
+  color: var(--ink-soft);
+  word-break: break-word;
+  min-width: 0;
+}
+.card-state {
+  flex: none;
+  font-size: .8125rem;
+  font-weight: 600;
+  padding: .2rem .6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.card-state[data-state="queued"]  { background: var(--paper-warm); color: var(--ink-soft); }
+.card-state[data-state="working"] { background: var(--paper-warm); color: var(--crust-deep); }
+.card-state[data-state="ok"]      { background: #e8f2ec; color: var(--ok); }
+.card-state[data-state="check"]   { background: var(--warn-bg); color: var(--warn); }
+.card-state[data-state="err"]     { background: #fbeae8; color: var(--err); }
+.card-state[data-state="timeout"] { background: var(--warn-bg); color: var(--warn); }
+
+/* progress — flex in an RTL page already fills right-to-left, which is what
+   we want: the first step sits on the right, where reading starts. */
+.steps {
+  display: flex;
+  gap: .35rem;
+  margin: .8rem 0 .2rem;
+}
+.step {
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+}
+.step.done { background: var(--crust); }
+.step.now  { background: var(--sun); }
+.step-label {
+  font-size: .8125rem;
+  color: var(--ink-soft);
+  margin: .35rem 0 0;
+  text-align: start;
+}
+
+/* extracted fields */
+.fields {
+  margin: .85rem 0 0;
+  border-top: 1px solid var(--line);
+  padding-top: .75rem;
+  font-size: .9375rem;
+}
+.field-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .2rem 0;
+}
+.field-row dt { color: var(--ink-soft); margin: 0; }
+.field-row dd { margin: 0; text-align: left; font-variant-numeric: tabular-nums; }
+.field-row.total dd { font-weight: 700; color: var(--crust-deep); font-size: 1.0625rem; }
+
+.card-note {
+  margin: .7rem 0 0;
+  padding: .55rem .7rem;
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-line);
+  border-radius: 8px;
+  font-size: .8125rem;
+  line-height: 1.6;
+  color: var(--warn);
+}
+.card-err {
+  margin: .7rem 0 0;
+  font-size: .9375rem;
+  color: var(--err);
+  line-height: 1.6;
+}
+
+.card-actions {
+  display: flex;
+  gap: .5rem;
+  margin: .8rem 0 0;
+  flex-wrap: wrap;
+}
+.card-actions .btn { padding: .45rem 1rem; font-size: .9375rem; }
+
+/* ── Summary ──────────────────────────────────────────── */
+.summary {
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+  margin: 0 0 2rem;
+}
+.summary[hidden] { display: none; }
+.summary h2 { margin: 0 0 .35rem; font-size: 1.25rem; }
+.summary p { margin: 0; font-size: .9375rem; color: var(--ink-soft); line-height: 1.7; }
+.summary-actions { margin: .9rem 0 0; }
+
+/* ── Footer ───────────────────────────────────────────── */
+.foot {
+  border-top: 1px solid var(--line);
+  background: var(--paper-warm);
+  padding: 1.5rem 0;
+  margin-top: 2rem;
+  font-size: .875rem;
+  color: var(--ink-soft);
+  line-height: 1.8;
+}
+.foot strong { color: var(--crust-deep); }
+
+@media (max-width: 30rem) {
+  .btn-row .btn { flex: 1 1 100%; max-width: none; }
+  .card-top { flex-wrap: wrap; }
+}

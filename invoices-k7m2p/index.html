@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>לחם ושמש — קליטת חשבוניות</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="images/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="images/logo.png">
+<meta name="apple-mobile-web-app-title" content="חשבוניות">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="masthead">
+  <div class="wrap masthead-inner">
+    <span class="mark" aria-hidden="true">
+      <svg viewBox="0 0 120 120" width="52" height="52">
+        <path d="M22 94a38 38 0 0 1 76 0" class="mark-sun"/>
+        <g class="mark-ink" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M60 106C54 88 48 64 46 40"/>
+          <path d="M46 46c-6-4-8-11-6-18 6 3 9 9 8 16"/>
+          <path d="M48 58c-7-3-10-9-9-16 6 2 10 8 10 15"/>
+          <path d="M51 70c-7-2-11-8-11-15 7 2 11 7 11 14"/>
+          <path d="M54 82c-7-2-11-7-12-14 7 1 11 6 12 13"/>
+          <path d="M60 106c6-16 11-38 13-60"/>
+          <path d="M73 52c6-4 8-11 6-18-6 3-9 9-8 16"/>
+          <path d="M71 64c7-3 10-9 9-16-6 2-10 8-10 15"/>
+          <path d="M68 76c7-2 11-8 11-15-7 2-11 7-11 14"/>
+          <path d="M65 88c7-2 11-7 12-14-7 1-11 6-12 13"/>
+        </g>
+      </svg>
+    </span>
+    <div>
+      <h1>לחם ושמש</h1>
+      <p class="tagline">קליטת חשבוניות</p>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <section class="intro">
+    <p>
+      צלמו את החשבונית ברגע שהיא מגיעה, או העלו קובץ סרוק.
+      הקובץ יישמר בגוגל לפי החודש בשנה, תיכתב שורה בגיליון, ויגיע מייל שזה נקלט.
+    </p>
+  </section>
+
+  <!-- ── Picking files ──────────────────────────────────── -->
+  <section class="pick" id="pick">
+    <div class="btn-row">
+      <button type="button" class="btn btn-primary" id="btn-camera">📷 צלמו חשבונית</button>
+      <button type="button" class="btn btn-secondary" id="btn-gallery">🖼 בחרו מהגלריה</button>
+    </div>
+    <p class="pick-or">או גררו קבצים לכאן</p>
+    <p class="pick-hint">עד 10 קבצים בבת אחת · JPG, PNG או PDF</p>
+
+    <!-- capture= opens the camera straight away on a phone -->
+    <input type="file" id="in-camera" accept="image/*" capture="environment">
+    <input type="file" id="in-gallery" accept="image/*,application/pdf" multiple>
+  </section>
+
+  <div class="notice notice-warn" id="msg" hidden></div>
+  <div class="notice notice-info" id="leave-note" hidden>
+    ההעלאה התחילה — אפשר לסגור את הדף, המייל יגיע בכל מקרה.
+  </div>
+
+  <!-- ── The list ───────────────────────────────────────── -->
+  <section class="list" id="list" hidden>
+    <div class="list-head">
+      <h2>החשבוניות שלכם</h2>
+      <span class="list-count" id="count"></span>
+    </div>
+    <div id="cards"></div>
+  </section>
+
+  <!-- ── Session summary ────────────────────────────────── -->
+  <section class="summary" id="summary" hidden>
+    <h2 id="summary-title"></h2>
+    <p id="summary-text"></p>
+    <div class="summary-actions">
+      <button type="button" class="btn btn-primary" id="btn-again">להעלות עוד</button>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <strong>לחם ושמש</strong><br>
+    שכונת הדר, חיפה · מ־2019
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
