@@ -19,6 +19,13 @@
   var STATUS = API + '/parse-status';
   var NOTIFY = API + '/invoice-notify';
 
+  // A flagged row is written to the sheet like any other — filed, never lost —
+  // but the disagreement is only resolvable against the paper. The sheet is the
+  // one place the client can actually correct a number, so the page has to say
+  // where it is. Retaking the same invoice re-rolls the reading and files a
+  // second row; it is offered, but it is not the answer.
+  var SHEET_URL = 'https://docs.google.com/spreadsheets/d/1acT5tX_SrCVKF_WjwZDJn9WojJpMoP8rlDr10U5AZC0/edit';
+
   var MAX_FILES = 10;
   var STORE_KEY = 'lehem-invoices-v1';
 
@@ -303,6 +310,11 @@
         if (job.fields.row_notes) {
           var n = el('div', 'card-note');
           n.appendChild(text('לבדיקה · ' + job.fields.row_notes));
+          if (job.state === 'check') {
+            var fix = el('div', 'card-note-fix');
+            fix.appendChild(text('החשבונית נשמרה. אפשר להשוות מול הצילום ולתקן את השורה ישירות בגיליון.'));
+            n.appendChild(fix);
+          }
           card.appendChild(n);
         }
       }
@@ -311,6 +323,19 @@
         var er = el('p', 'card-err');
         er.appendChild(text(job.error));
         card.appendChild(er);
+      }
+
+      if (job.state === 'check') {
+        // The row is already filed. The only real fix is against the paper, in
+        // the sheet — so that is the primary action. "נסו שוב" is deliberately
+        // absent: re-parsing identical pixels re-rolls the same reading and
+        // writes a second row for one invoice.
+        var checkActs = el('div', 'card-actions');
+        checkActs.appendChild(linkButton('פתחו את הגיליון לתיקון', 'btn-primary', SHEET_URL));
+        if (job.file) {
+          checkActs.appendChild(button('צלמו מחדש', 'btn-secondary', function () { reshoot(job); }));
+        }
+        card.appendChild(checkActs);
       }
 
       if (job.state === 'err' || job.state === 'timeout') {
@@ -343,6 +368,17 @@
     b.appendChild(text(label));
     b.addEventListener('click', fn);
     return b;
+  }
+
+  // An <a> rather than a button: the sheet opens in its own tab, so a poll that
+  // is still running in this one is not thrown away.
+  function linkButton(label, cls, href) {
+    var a = el('a', 'btn ' + cls);
+    a.href = href;
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.appendChild(text(label));
+    return a;
   }
 
   // ── session end ────────────────────────────────────────

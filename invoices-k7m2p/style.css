@@ -86,6 +86,7 @@ a  { color: var(--crust); }
   font-weight: 600;
   cursor: pointer;
   text-align: center;
+  text-decoration: none;   /* .btn is used on <a> as well as <button> */
 }
 .btn-primary { background: var(--crust); color: #fff; }
 .btn-primary:hover { background: var(--crust-deep); }
@@ -229,6 +230,13 @@ a  { color: var(--crust); }
   line-height: 1.6;
   color: var(--warn);
 }
+.card-note-fix {
+  margin: .4rem 0 0;
+  padding: .4rem 0 0;
+  border-top: 1px solid var(--warn-line);
+  color: var(--ink-soft);
+}
+
 .card-err {
   margin: .7rem 0 0;
   font-size: .9375rem;
